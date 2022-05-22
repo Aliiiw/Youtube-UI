@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_sample_ui/entities.dart';
+import 'package:youtube_sample_ui/widgets/video_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,11 +11,12 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            floating: true,
             leading: Padding(
               padding: const EdgeInsets.only(left: 12),
               child: Image.asset('assets/images/logo.png'),
             ),
-            leadingWidth: 140,
+            leadingWidth: 120,
             actions: [
               IconButton(
                   onPressed: (){},
@@ -29,11 +32,21 @@ class HomeScreen extends StatelessWidget {
               ),
               IconButton(
                   onPressed: (){},
-                  icon: const CircleAvatar(
+                  icon: CircleAvatar(
+                    backgroundImage: AssetImage(user.profileUrl),
                   )
               )
             ],
 
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final video = videos[index];
+                  return VideoCard(video: video);
+                } ,
+
+              )
           )
         ],
 

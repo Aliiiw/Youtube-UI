@@ -13,7 +13,7 @@ class User{
 
 User user = const User(
     username: 'Ali Rahimi',
-    profileUrl: 'assets/images/sp1',
+    profileUrl: 'assets/images/sp1.jpeg',
     subcribers: '123');
 
 class Video{
@@ -45,7 +45,7 @@ final List<Video> videos = [
       id: 'qwerrtyyu',
       author: user,
       title: 'Learning Flutter in 3 Hours',
-      url: 'assets/images/sp2.jpeg',
+      url: 'assets/images/sp4.jpeg',
       durationTime: '43:45',
       releasedTime: DateTime(2022, 7,14),
       view: '14k',
@@ -65,7 +65,17 @@ final List<Video> videos = [
       id: 'ioiyoyukrf',
       author: user,
       title: 'Try to Escape from Life',
-      url: 'assets/images/sp4.jpeg',
+      url: 'assets/images/sp1.jpeg',
+      durationTime: '28:23',
+      releasedTime: DateTime(2021,3,7),
+      view: '343k',
+      likes: '555',
+      dislikes: '44'),
+  Video(
+      id: 'ioiyoyukrf',
+      author: user,
+      title: 'Try to Escape from Life',
+      url: 'assets/images/sp1.jpeg',
       durationTime: '28:23',
       releasedTime: DateTime(2021,3,7),
       view: '343k',
@@ -78,7 +88,7 @@ final List<Video> suggestionVideos = [
       id: 'tgmrsfdgnlf',
       author: user,
       title: 'Learning Kotlin in 3 Hours',
-      url: 'assets/images/sp2.jpeg',
+      url: 'assets/images/sp1.jpeg',
       durationTime: '47:45',
       releasedTime: DateTime(2022, 9,5),
       view: '16k',
