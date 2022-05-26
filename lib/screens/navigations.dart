@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/all.dart';
+import 'package:youtube_sample_ui/entities.dart';
 import 'home_screen.dart';
+
+final selectedVideo = StateProvider<Video?>((ref) => null);
 
 class NavigateScreen extends StatefulWidget {
   const NavigateScreen({Key? key}) : super(key: key);
@@ -23,34 +26,39 @@ class _NavigateScreenState extends State<NavigateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (indx) => setState(() => _currentIndex = indx),
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-              activeIcon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              label: 'Explore',
-              activeIcon: Icon(Icons.explore)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle_outline),
-              label: 'Add',
-              activeIcon: Icon(Icons.add_circle)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.subscriptions_outlined),
-              label: 'Subscriptions',
-              activeIcon: Icon(Icons.video_library_outlined)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.video_library),
-              label: 'Library',
-              activeIcon: Icon(Icons.home)),
-        ],
-      ),
+    return Consumer(
+      builder: (context, watch, _){
+        final _selectedVideo = watch(selectedVideo).state;
+        return Scaffold(
+          body: screens[_currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (indx) => setState(() => _currentIndex = indx),
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  label: 'Home',
+                  activeIcon: Icon(Icons.home)),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.explore_outlined),
+                  label: 'Explore',
+                  activeIcon: Icon(Icons.explore)),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle_outline),
+                  label: 'Add',
+                  activeIcon: Icon(Icons.add_circle)),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.subscriptions_outlined),
+                  label: 'Subscriptions',
+                  activeIcon: Icon(Icons.video_library_outlined)),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.video_library),
+                  label: 'Library',
+                  activeIcon: Icon(Icons.home)),
+            ],
+          ),
+        );
+      }
     );
   }
 }

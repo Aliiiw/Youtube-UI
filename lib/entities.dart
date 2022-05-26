@@ -114,4 +114,14 @@ final List<Video> suggestionVideos = [
       view: '33k',
       likes: '55',
       dislikes: '4'),
+  Video(
+      id: 'gfhfhgdhsad',
+      author: user,
+      title: 'Try to Learn ObjectBox',
+      url: 'assets/images/sp1.jpeg',
+      durationTime: '23:23',
+      releasedTime: DateTime(2020,3,7),
+      view: '33k',
+      likes: '55',
+      dislikes: '4'),
 ];

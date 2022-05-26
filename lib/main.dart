@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:youtube_sample_ui/screens/navigations.dart';
 import 'entities.dart';
 
 void main() {
-  runApp(const YouTube());
+  runApp(const ProviderScope(child: YouTube()));
 }
 
 class YouTube extends StatelessWidget {

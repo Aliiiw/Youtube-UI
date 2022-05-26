@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            floating: true,
             leading: Padding(
               padding: const EdgeInsets.only(left: 12),
               child: Image.asset('assets/images/logo.png'),
@@ -45,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                   final video = videos[index];
                   return VideoCard(video: video);
                 } ,
+                childCount: videos.length
 
               )
           )
