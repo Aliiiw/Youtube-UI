@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniplayer/miniplayer.dart';
 import 'package:youtube_sample_ui/entities.dart';
 import 'package:youtube_sample_ui/widgets/video_card.dart';
 
@@ -8,6 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -47,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                 childCount: videos.length
 
               )
-          )
+          ),
         ],
 
       ),
