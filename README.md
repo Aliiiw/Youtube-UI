@@ -1,6 +1,6 @@
 # youtube_sample_ui
 
-a simple sample from youtube's pages ui with Flutter framework
+a simple sample from youtube's home page ui with Flutter framework
 
 ## Getting Started
 
