@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:youtube_sample_ui/entities.dart';
+import 'package:youtube_sample_ui/screens/expand_video_screen.dart';
 import 'home_screen.dart';
 import 'package:timeago/timeago.dart' as timago;
 
 final selectedVideo = StateProvider<Video?>((ref) => null);
+final miniPlayerController = StateProvider<MiniplayerController>((ref) => MiniplayerController());
 
 class NavigateScreen extends StatefulWidget {
   const NavigateScreen({Key? key}) : super(key: key);
@@ -48,6 +50,7 @@ class _NavigateScreenState extends State<NavigateScreen> {
       body: Consumer(
         builder: (context, watch, _) {
           final _selectedVideo = watch(selectedVideo).state;
+          final _miniPlayerController = watch(miniPlayerController ).state;
           return Stack(
             children: screens
                 .asMap()
@@ -64,77 +67,81 @@ class _NavigateScreenState extends State<NavigateScreen> {
                 Offstage(
                   offstage: _selectedVideo == null,
                   child: Miniplayer(
+                    controller: _miniPlayerController,
                       maxHeight: MediaQuery.of(context).size.height,
                       minHeight: _playerHeight,
                       builder: (height, percentage) {
                         if (_selectedVideo == null) {
                           return const SizedBox.shrink();
                         }
-                        return Container(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      _selectedVideo.url,
-                                      height: _playerHeight - 4,
-                                      width: 120,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              _selectedVideo.title,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .caption!
-                                                  .copyWith(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                            ),
-                                          ),
-                                          Flexible(
-                                            child: Text(
+                        if(height <= _playerHeight + 50){
+                          return Container(
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        _selectedVideo.url,
+                                        height: _playerHeight - 4,
+                                        width: 120,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                _selectedVideo.title,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .caption!
-                                                    .copyWith(fontSize: 12),
-                                                overflow: TextOverflow.ellipsis,
-                                                _selectedVideo.author.username),
-                                          ),
-                                        ],
+                                                    .copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                    FontWeight.w600),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              child: Text(
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .caption!
+                                                      .copyWith(fontSize: 12),
+                                                  overflow: TextOverflow.ellipsis,
+                                                  _selectedVideo.author.username),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    IconButton(
-                                        onPressed: (){}
-                                        , icon: const Icon(Icons.play_arrow)),
-                                    IconButton(
-                                        onPressed: (){
-                                          context
-                                          .read(selectedVideo)
-                                              .state = null;
-                                        }
-                                        , icon: const Icon(Icons.close)),
-                                  ],
-                                ),
-                                const LinearProgressIndicator(
-                                  value: 0.4,
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(Colors.red),
-                                )
-                              ],
-                            ));
+                                      IconButton(
+                                          onPressed: (){}
+                                          , icon: const Icon(Icons.play_arrow)),
+                                      IconButton(
+                                          onPressed: (){
+                                            context
+                                                .read(selectedVideo)
+                                                .state = null;
+                                          }
+                                          , icon: const Icon(Icons.close)),
+                                    ],
+                                  ),
+                                  const LinearProgressIndicator(
+                                    value: 0.5,
+                                    valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.red),
+                                  )
+                                ],
+                              ));
+                        }
+                        return const VideoScreen();
                       }),
                 ),
               ),
