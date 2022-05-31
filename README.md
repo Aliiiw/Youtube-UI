@@ -1,6 +1,7 @@
-# youtube_sample_ui
+# youtube_sample_homePage_ui
 
 a simple sample from youtube's home page ui with Flutter framework
+"using riverpod"
 
 ## Getting Started
 
